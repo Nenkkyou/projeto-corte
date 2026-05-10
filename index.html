@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto Corte • Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" aria-label="Navegação principal">
+        <div class="brand" aria-label="Logo Projeto Corte">
+          <div class="brand-icon" aria-hidden="true">
+            <div class="brand-frame"></div>
+            <div class="brand-cut"></div>
+          </div>
+          <div class="brand-text">
+            <span class="brand-top">PROJETO</span>
+            <span class="brand-bottom">CORTE</span>
+          </div>
+        </div>
+
+        <p class="sidebar-lead">Painel técnico para gestão de projetos, cortes e produção de marcenaria.</p>
+
+        <nav class="menu" id="menu"></nav>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <h1>Dashboard Operacional</h1>
+            <p>Visão consolidada da operação comercial e produtiva.</p>
+          </div>
+          <span class="period">01/05/2026 — 31/05/2026</span>
+        </header>
+
+        <section class="metrics" id="metrics" aria-label="Indicadores"></section>
+
+        <section class="panel-grid">
+          <article class="card" id="finance"></article>
+          <article class="card" id="deadlines"></article>
+        </section>
+
+        <article class="card featured" id="featured-project"></article>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
