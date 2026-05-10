@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto Corte | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-mark" aria-hidden="true"></div>
+          <div class="logo-text">
+            <span>PROJETO</span>
+            <strong>CORTE</strong>
+          </div>
+        </div>
+
+        <section class="hero">
+          <h1>Projetos que <span>cortam distâncias.</span></h1>
+          <p>
+            Projetos técnicos, detalhamento executivo e listas de corte para
+            marcenaria com padrão profissional.
+          </p>
+          <div class="hero-actions">
+            <button>Solicitar Projeto</button>
+            <button class="secondary">Ver Exemplo Técnico</button>
+          </div>
+        </section>
+
+        <nav class="menu">
+          <a class="active" href="#">Dashboard</a>
+          <a href="#">Clientes</a>
+          <a href="#">Projetos</a>
+          <a href="#">Novo Projeto</a>
+          <a href="#">Lista de Corte</a>
+          <a href="#">Orçamentos</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <h2>Dashboard</h2>
+          <div class="range">01/05/2026 • 31/05/2026</div>
+        </header>
+
+        <section class="metrics" id="metrics"></section>
+
+        <section class="panel-grid">
+          <article class="panel">
+            <h3>Resumo Financeiro</h3>
+            <div class="stat-row">
+              <div><small>Faturamento Previsto</small><strong>R$ 286.750</strong></div>
+              <div><small>Confirmado</small><strong>R$ 153.980</strong></div>
+              <div><small>Ticket Médio</small><strong>R$ 3.842</strong></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Próximos Prazos</h3>
+            <ul class="deadlines">
+              <li><span>Residencial Alpha</span><b>15/05</b></li>
+              <li><span>Escritório Corporate</span><b>22/05</b></li>
+              <li><span>Closet Master</span><b>29/05</b></li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="project-card">
+          <div class="project-header">
+            <h3>Projeto Premium Residencial Alpha</h3>
+            <span class="badge">Em Produção</span>
+          </div>
+          <p>Cliente: Carlos Menezes • Ambiente: Cozinha • Data: 15/05/2026</p>
+          <div class="actions">
+            <button class="secondary">Baixar PDF</button>
+            <button>Gerar Orçamento</button>
+            <button>Enviar para Produção</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
