@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" role="img" aria-label="Projeto Corte">
+  <rect width="900" height="260" fill="#000"/>
+  <g transform="translate(30,28)">
+    <path d="M0 170 L0 20 L170 20 L145 45 L25 45 L25 145 Z" fill="#fff"/>
+    <path d="M170 35 L170 205 L0 205 L25 180 L145 180 L145 80 Z" fill="#fff"/>
+    <path d="M-5 186 L164 17 L185 38 L16 207 Z" fill="#78cb14"/>
+  </g>
+  <g font-family="Arial Black, Impact, sans-serif" font-weight="900" letter-spacing="2">
+    <text x="250" y="115" font-size="92" fill="#fff">PROJETO</text>
+    <text x="250" y="210" font-size="92" fill="#78cb14">CORTE</text>
+  </g>
+</svg>

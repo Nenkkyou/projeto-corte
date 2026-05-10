@@ -15,13 +15,8 @@ body { margin: 0; font-family: Inter, sans-serif; color: var(--text); background
 .app-layout { min-height: 100vh; display: grid; grid-template-columns: 360px 1fr; }
 .sidebar { background: linear-gradient(180deg, #020609, #041015); border-right: 1px solid #133027; padding: 20px; }
 
-.brand { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-.brand-icon { width: 64px; aspect-ratio: 1; position: relative; flex: 0 0 64px; }
-.brand-frame { position: absolute; inset: 0; border: 8px solid var(--white); }
-.brand-cut { position: absolute; width: 95px; height: 10px; left: -18px; top: 28px; transform: rotate(-42deg); background: linear-gradient(90deg, var(--green-strong), var(--green)); }
-.brand-text { font-family: Teko, sans-serif; letter-spacing: .07em; line-height: .88; }
-.brand-top,.brand-bottom { display:block; font-size:2.5rem; }
-.brand-top{ color:var(--white);} .brand-bottom{ color:var(--green);} 
+.brand { margin-bottom: 20px; }
+.brand-image { display:block; width: 100%; max-width: 300px; height: auto; object-fit: contain; }
 
 .sidebar-actions { border-top: 1px solid rgba(117, 209, 20, 0.16); padding-top: 20px; display:grid; gap:12px; margin-bottom: 24px; }
 .sidebar-btn { width:100%; border-radius:14px; padding:14px 16px; font-weight:700; font-size:1.05rem; cursor:pointer; }

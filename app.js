@@ -1,5 +1,5 @@
 const dashboardData = {
-  brand: { top: 'PROJETO', bottom: 'CORTE' },
+  brand: { src: 'logo-projeto-corte.svg', alt: 'Logo Projeto Corte' },
   page: {
     title: 'Dashboard Operacional',
     subtitle: 'Visão consolidada da operação comercial e produtiva.',
@@ -35,16 +35,7 @@ const dashboardData = {
 };
 
 const brand = document.querySelector('#brand');
-brand.innerHTML = `
-  <div class="brand-icon" aria-hidden="true">
-    <div class="brand-frame"></div>
-    <div class="brand-cut"></div>
-  </div>
-  <div class="brand-text">
-    <span class="brand-top">${dashboardData.brand.top}</span>
-    <span class="brand-bottom">${dashboardData.brand.bottom}</span>
-  </div>
-`;
+brand.innerHTML = `<img class="brand-image" src="${dashboardData.brand.src}" alt="${dashboardData.brand.alt}" />`;
 
 const sidebarActions = document.querySelector('#sidebar-actions');
 dashboardData.actions.forEach(({ label, className }) => {
