@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda - Projeto Corte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar navigation -->
+    <aside class="sidebar">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Projeto Corte Logo" class="logo-image" />
+      </div>
+      <p class="tagline">
+        Projetos que<br />
+        <span class="highlight">cortam distâncias.</span><br />
+        Resultados que constroem.
+      </p>
+      <button class="btn primary-btn" onclick="alert('Agendar reunião')">
+        <i class="fas fa-calendar-plus"></i> Agendar
+      </button>
+      <button class="btn secondary-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i> Ver Exemplo
+      </button>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="clientes.html" class="nav-item"><i class="fa-solid fa-users"></i> Clientes</a>
+        <a href="projetos.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> Projetos</a>
+        <a href="proposta.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Nova Proposta</a>
+        <a href="agenda.html" class="nav-item active"><i class="fa-solid fa-calendar-days"></i> Agenda</a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-heart"></i> Home</a>
+      </nav>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="content">
+      <!-- Header -->
+      <header class="header">
+        <div class="left-header">
+          <h1 class="page-title">Agenda</h1>
+          <div class="date-range">Gerenciamento de Reuniões e Eventos</div>
+        </div>
+      </header>
+
+      <div class="page-body">
+      <!-- Stats Section -->
+      <section class="stats">
+        <div class="stat-card">
+          <i class="fas fa-calendar-check stat-icon"></i>
+          <div class="stat-title">Reuniões Agendadas</div>
+          <div class="stat-value">12</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-people-group stat-icon"></i>
+          <div class="stat-title">Participantes</div>
+          <div class="stat-value">28</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-hourglass-end stat-icon"></i>
+          <div class="stat-title">Hoje</div>
+          <div class="stat-value">3</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-exclamation stat-icon"></i>
+          <div class="stat-title">Próximos 7 dias</div>
+          <div class="stat-value">8</div>
+        </div>
+      </section>
+
+      <!-- Calendar and Events -->
+      <section class="calendar-section">
+        <div class="calendar-container">
+          <!-- Simple Calendar for May 2026 -->
+          <div class="calendar-header">
+            <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+            <h3>Maio 2026</h3>
+            <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="calendar-grid">
+            <div class="calendar-day-header">Dom</div>
+            <div class="calendar-day-header">Seg</div>
+            <div class="calendar-day-header">Ter</div>
+            <div class="calendar-day-header">Qua</div>
+            <div class="calendar-day-header">Qui</div>
+            <div class="calendar-day-header">Sex</div>
+            <div class="calendar-day-header">Sab</div>
+
+            <div class="calendar-empty-day">26</div>
+            <div class="calendar-empty-day">27</div>
+            <div class="calendar-empty-day">28</div>
+            <div class="calendar-empty-day">29</div>
+            <div class="calendar-empty-day">30</div>
+            <div class="calendar-day">1</div>
+            <div class="calendar-day">2</div>
+            <div class="calendar-day">3</div>
+            <div class="calendar-day">4</div>
+            <div class="calendar-day">5</div>
+            <div class="calendar-day">6</div>
+            <div class="calendar-day">7</div>
+            <div class="calendar-day">8</div>
+            <div class="calendar-day">9</div>
+            <div class="calendar-day">10</div>
+            <div class="calendar-day">11</div>
+            <div class="calendar-day event-day">12</div>
+            <div class="calendar-day event-day">13</div>
+            <div class="calendar-day">14</div>
+            <div class="calendar-day">15</div>
+            <div class="calendar-day event-day">16</div>
+            <div class="calendar-day">17</div>
+            <div class="calendar-day">18</div>
+            <div class="calendar-day">19</div>
+            <div class="calendar-day">20</div>
+            <div class="calendar-day event-day today">21</div>
+            <div class="calendar-day">22</div>
+            <div class="calendar-day">23</div>
+            <div class="calendar-day">24</div>
+            <div class="calendar-day event-day">25</div>
+            <div class="calendar-day">26</div>
+            <div class="calendar-day">27</div>
+            <div class="calendar-day">28</div>
+            <div class="calendar-day">29</div>
+            <div class="calendar-day">30</div>
+            <div class="calendar-day">31</div>
+          </div>
+        </div>
+
+        <!-- Events List -->
+        <div class="events-list">
+          <h3><i class="fas fa-list"></i> Próximos Eventos</h3>
+          
+          <div class="event-item today">
+            <div class="event-date">
+              <div class="event-day">21/05</div>
+              <div class="event-time">14:00</div>
+            </div>
+            <div class="event-details">
+              <h4>Reunião com Cliente - Carlos Meneses</h4>
+              <p class="event-desc">Acompanhamento do projeto Residencial Alpha. Local: Escritório</p>
+              <div class="event-actions">
+                <span class="badge badge-success">Confirmado</span>
+                <button class="btn btn-tiny"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tiny"><i class="fas fa-trash"></i> Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-item today">
+            <div class="event-date">
+              <div class="event-day">21/05</div>
+              <div class="event-time">16:30</div>
+            </div>
+            <div class="event-details">
+              <h4>Reunião de Planejamento - Boutique Center</h4>
+              <p class="event-desc">Discussão sobre cronograma de produção. Participantes: Marina Costa, Equipe Técnica</p>
+              <div class="event-actions">
+                <span class="badge badge-info">Pendente</span>
+                <button class="btn btn-tiny"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tiny"><i class="fas fa-trash"></i> Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-item today">
+            <div class="event-date">
+              <div class="event-day">21/05</div>
+              <div class="event-time">18:00</div>
+            </div>
+            <div class="event-details">
+              <h4>Visita ao Local - Banheiro Premium</h4>
+              <p class="event-desc">Inspeção e medições no local. Cliente: João Silva</p>
+              <div class="event-actions">
+                <span class="badge badge-warning">Agendado</span>
+                <button class="btn btn-tiny"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tiny"><i class="fas fa-trash"></i> Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="event-date">
+              <div class="event-day">25/05</div>
+              <div class="event-time">10:00</div>
+            </div>
+            <div class="event-details">
+              <h4>Apresentação de Orçamento</h4>
+              <p class="event-desc">Apresentar proposta para projeto Sala de Estar. Cliente: Maria Souza</p>
+              <div class="event-actions">
+                <span class="badge badge-warning">Agendado</span>
+                <button class="btn btn-tiny"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tiny"><i class="fas fa-trash"></i> Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="event-date">
+              <div class="event-day">28/05</div>
+              <div class="event-time">15:00</div>
+            </div>
+            <div class="event-details">
+              <h4>Reunião Técnica - Equipe Interna</h4>
+              <p class="event-desc">Discussão sobre cronograma de todos os projetos em produção</p>
+              <div class="event-actions">
+                <span class="badge badge-info">Pendente</span>
+                <button class="btn btn-tiny"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tiny"><i class="fas fa-trash"></i> Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <div class="event-date">
+              <div class="event-day">01/06</div>
+              <div class="event-time">09:00</div>
+            </div>
+            <div class="event-details">
+              <h4>Inspeção Final - Cozinha Premium</h4>
+              <p class="event-desc">Vistoria e aprovação do cliente. Cliente: Fernando Lima</p>
+              <div class="event-actions">
+                <span class="badge badge-warning">Agendado</span>
+                <button class="btn btn-tiny"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tiny"><i class="fas fa-trash"></i> Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clientes - Projeto Corte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar navigation -->
+    <aside class="sidebar">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Projeto Corte Logo" class="logo-image" />
+      </div>
+      <p class="tagline">
+        Projetos que<br />
+        <span class="highlight">cortam distâncias.</span><br />
+        Resultados que constroem.
+      </p>
+      <button class="btn primary-btn" onclick="window.location.href='proposta.html'">
+        <i class="fas fa-plus"></i> Solicitar Projeto
+      </button>
+      <button class="btn secondary-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i> Ver Exemplo
+      </button>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="clientes.html" class="nav-item active"><i class="fa-solid fa-users"></i> Clientes</a>
+        <a href="projetos.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> Projetos</a>
+        <a href="proposta.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Nova Proposta</a>
+        <a href="agenda.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Agenda</a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-heart"></i> Home</a>
+      </nav>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="content">
+      <!-- Header -->
+      <header class="header">
+        <div class="left-header">
+          <h1 class="page-title">Clientes</h1>
+          <div class="date-range">Gerenciamento de Clientes e Casos de Sucesso</div>
+        </div>
+      </header>
+
+      <div class="page-body">
+      <!-- Stats Section -->
+      <section class="stats">
+        <div class="stat-card">
+          <i class="fas fa-users stat-icon"></i>
+          <div class="stat-title">Total de Clientes</div>
+          <div class="stat-value">85</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-star stat-icon"></i>
+          <div class="stat-title">Avaliação Média</div>
+          <div class="stat-value">4.8</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-thumbs-up stat-icon"></i>
+          <div class="stat-title">Taxa de Aprovação</div>
+          <div class="stat-value">95%</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-repeat stat-icon"></i>
+          <div class="stat-title">Clientes Recorrentes</div>
+          <div class="stat-value">42</div>
+        </div>
+      </section>
+
+      <!-- Clients Table -->
+      <section class="clients-section">
+        <h3><i class="fas fa-list"></i> Listagem de Clientes</h3>
+        <div class="filters">
+          <input type="text" placeholder="Buscar cliente..." class="search-input" />
+          <select class="filter-select">
+            <option>Todos</option>
+            <option>Ativos</option>
+            <option>Inativos</option>
+          </select>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Projetos</th>
+                <th>Status</th>
+                <th>Data Cadastro</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Carlos Meneses</td>
+                <td>carlos@email.com</td>
+                <td>(11) 9 8765-4321</td>
+                <td>3</td>
+                <td><span class="badge badge-success">Ativo</span></td>
+                <td>15/01/2025</td>
+                <td><a href="#" class="table-action"><i class="fas fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                <td>Marina Costa</td>
+                <td>marina@email.com</td>
+                <td>(11) 9 9876-5432</td>
+                <td>2</td>
+                <td><span class="badge badge-success">Ativo</span></td>
+                <td>20/02/2025</td>
+                <td><a href="#" class="table-action"><i class="fas fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                <td>Fernando Lima</td>
+                <td>fernando@email.com</td>
+                <td>(11) 9 7654-3210</td>
+                <td>5</td>
+                <td><span class="badge badge-success">Ativo</span></td>
+                <td>10/03/2025</td>
+                <td><a href="#" class="table-action"><i class="fas fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                <td>Joana Silva</td>
+                <td>joana@email.com</td>
+                <td>(11) 9 6543-2109</td>
+                <td>1</td>
+                <td><span class="badge badge-warning">Inativo</span></td>
+                <td>25/04/2025</td>
+                <td><a href="#" class="table-action"><i class="fas fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                <td>João Silva</td>
+                <td>joao.silva@email.com</td>
+                <td>(11) 9 5432-1098</td>
+                <td>2</td>
+                <td><span class="badge badge-success">Ativo</span></td>
+                <td>08/05/2025</td>
+                <td><a href="#" class="table-action"><i class="fas fa-eye"></i></a></td>
+              </tr>
+              <tr>
+                <td>Maria Souza</td>
+                <td>maria.souza@email.com</td>
+                <td>(11) 9 4321-0987</td>
+                <td>1</td>
+                <td><span class="badge badge-success">Ativo</span></td>
+                <td>12/05/2025</td>
+                <td><a href="#" class="table-action"><i class="fas fa-eye"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Success Cases -->
+      <section class="success-cases">
+        <h3><i class="fas fa-award"></i> Casos de Sucesso</h3>
+        <div class="cases-grid">
+          <div class="case-card">
+            <div class="case-header">
+              <h4>Residencial Premium Alpha</h4>
+              <div class="case-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p class="case-client"><strong>Cliente:</strong> Carlos Meneses</p>
+            <p class="case-description">Projeto de reforma completa com foco em modernidade, conforto e sustentabilidade. Incluiu planejamento arquitetônico, design de interiores e gestão de obra.</p>
+            <div class="case-details">
+              <span><i class="fas fa-check"></i> Entrega: 25/02/2026</span>
+              <span><i class="fas fa-plus"></i> Múltiplos Ambientes</span>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="case-header">
+              <h4>Boutique Comercial Center</h4>
+              <div class="case-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p class="case-client"><strong>Cliente:</strong> Marina Costa</p>
+            <p class="case-description">Espaço comercial com design moderno e funcional. Projeto executivo completo com foco na experiência do cliente e otimização de fluxo.</p>
+            <div class="case-details">
+              <span><i class="fas fa-spinner"></i> Em Execução</span>
+              <span><i class="fas fa-store"></i> Comercial</span>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="case-header">
+              <h4>Cozinha Premium Design</h4>
+              <div class="case-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p class="case-client"><strong>Cliente:</strong> Fernando Lima</p>
+            <p class="case-description">Cozinha planejada com tecnologia de ponta, elegância e funcionalidade. Projeto personalisado com materiais premium e acabamentos sofisticados.</p>
+            <div class="case-details">
+              <span><i class="fas fa-check"></i> Entrega: 12/01/2026</span>
+              <span><i class="fas fa-utensils"></i> Cozinha</span>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="case-header">
+              <h4>Home Office Executivo</h4>
+              <div class="case-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-stroke"></i>
+              </div>
+            </div>
+            <p class="case-client"><strong>Cliente:</strong> Joana Silva</p>
+            <p class="case-description">Ambiente de trabalho em casa projetado para produtividade e conforto. Ergonomia, iluminação e acústica planejadas detalhadamente.</p>
+            <div class="case-details">
+              <span><i class="fas fa-check"></i> Entrega: 18/03/2026</span>
+              <span><i class="fas fa-laptop"></i> Escritório</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="testimonials-section">
+        <h3><i class="fas fa-quote-left"></i> Depoimentos</h3>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Excelente trabalho! A equipe da Projeto Corte superou minhas expectativas. Projeto bem executado e prazos respeitados."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">CM</div>
+              <div class="author-info">
+                <div class="author-name">Carlos Meneses</div>
+                <div class="author-role">Cliente - Residencial</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Profissionalismo impecável! A comunicação foi clara durante todo o processo. Recomendo muito os serviços da Projeto Corte."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">MC</div>
+              <div class="author-info">
+                <div class="author-name">Marina Costa</div>
+                <div class="author-role">Cliente - Comercial</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Projeto incrivelmente bem executado! Todos os detalhes foram cuidadosamente pensados. Voltaria a trabalhar com eles com certeza."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">FL</div>
+              <div class="author-info">
+                <div class="author-name">Fernando Lima</div>
+                <div class="author-role">Cliente - Interiores</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
