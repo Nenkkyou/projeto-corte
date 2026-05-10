@@ -12,41 +12,18 @@
   <body>
     <div class="app-layout">
       <aside class="sidebar" aria-label="Navegação principal">
-        <div class="brand" aria-label="Logo Projeto Corte">
-          <div class="brand-icon" aria-hidden="true">
-            <div class="brand-frame"></div>
-            <div class="brand-cut"></div>
-          </div>
-          <div class="brand-text">
-            <span class="brand-top">PROJETO</span>
-            <span class="brand-bottom">CORTE</span>
-          </div>
-        </div>
-
-        <div class="sidebar-actions">
-          <button class="sidebar-btn primary">+ Novo Projeto</button>
-          <button class="sidebar-btn secondary">🏠 Ver Exemplo</button>
-        </div>
-
+        <div class="brand" id="brand"></div>
+        <div class="sidebar-actions" id="sidebar-actions"></div>
         <nav class="menu" id="menu"></nav>
       </aside>
 
       <main class="content">
-        <header class="topbar">
-          <div>
-            <h1>Dashboard Operacional</h1>
-            <p>Visão consolidada da operação comercial e produtiva.</p>
-          </div>
-          <span class="period">01/05/2026 — 31/05/2026</span>
-        </header>
-
+        <header class="topbar" id="topbar"></header>
         <section class="metrics" id="metrics" aria-label="Indicadores"></section>
-
         <section class="panel-grid">
           <article class="card" id="finance"></article>
           <article class="card" id="deadlines"></article>
         </section>
-
         <article class="card featured" id="featured-project"></article>
       </main>
     </div>
