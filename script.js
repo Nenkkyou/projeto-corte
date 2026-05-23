@@ -12,6 +12,7 @@ function checkAuth() {
 }
 
 function logout() {
+  trackEvent('admin_logout', '');
   localStorage.removeItem(AUTH_KEY);
   window.location.href = 'login.html';
 }
@@ -24,13 +25,40 @@ function handleLogin(e) {
 
   if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
     localStorage.setItem(AUTH_KEY, '1');
+    trackEvent('admin_login', username);
     window.location.href = 'dashboard.html';
   } else {
+    trackEvent('admin_login_fail', username);
     errorEl.style.display = 'flex';
     document.getElementById('password').value = '';
   }
 }
-// --- End Auth ---
+// --- Tracking ---
+function genId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+function trackEvent(type, detail = '') {
+  const events = JSON.parse(localStorage.getItem('pc_events') || '[]');
+  events.push({ id: genId(), type, detail, timestamp: new Date().toISOString() });
+  if (events.length > 500) events.splice(0, events.length - 500);
+  localStorage.setItem('pc_events', JSON.stringify(events));
+}
+
+async function hashPassword(password) {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+// --- End Tracking ---
+
+// Captura erros JS globais
+window.onerror = function(message, source, lineno) {
+  trackEvent('js_error', `${message} (${source}:${lineno})`);
+};
+
+// Page view automático
+trackEvent('page_view', window.location.pathname.split('/').pop() || 'index.html');
 
 document.addEventListener('DOMContentLoaded', () => {
   // Login page
@@ -207,18 +235,35 @@ function updateDateRange() {
  */
 function handleFormSubmit(e) {
   e.preventDefault();
-
-  // Validate form
   const form = e.target;
   const formData = new FormData(form);
+  const session = JSON.parse(localStorage.getItem('pc_client_session') || '{}');
 
-  // Log form data (in production, send to server)
-  console.log('Form submitted:', Object.fromEntries(formData));
+  const requirements = formData.getAll('requirement');
+  const submission = {
+    id: genId(),
+    submittedAt: new Date().toISOString(),
+    clientEmail: session.email || 'anônimo',
+    clientName: session.name || 'anônimo',
+    data: {
+      projectName: formData.get('projectName'),
+      projectType: formData.get('projectType'),
+      environment: formData.get('environment'),
+      area: formData.get('area'),
+      description: formData.get('description'),
+      timeline: formData.get('timeline'),
+      budget: formData.get('budget'),
+      requirements,
+      contactMethod: formData.get('contactMethod'),
+    },
+  };
 
-  // Show success message
+  const submissions = JSON.parse(localStorage.getItem('pc_submissions') || '[]');
+  submissions.push(submission);
+  localStorage.setItem('pc_submissions', JSON.stringify(submissions));
+  trackEvent('form_submit', `${submission.clientName} — ${submission.data.projectName}`);
+
   showNotification('Proposta enviada com sucesso! Nossa equipe entrará em contato em breve.', 'success');
-
-  // Reset form
   form.reset();
 }
 
