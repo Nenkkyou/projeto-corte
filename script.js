@@ -39,10 +39,12 @@ function genId() {
 }
 
 function trackEvent(type, detail = '') {
-  const events = JSON.parse(localStorage.getItem('pc_events') || '[]');
-  events.push({ id: genId(), type, detail, timestamp: new Date().toISOString() });
-  if (events.length > 500) events.splice(0, events.length - 500);
-  localStorage.setItem('pc_events', JSON.stringify(events));
+  try {
+    const events = JSON.parse(localStorage.getItem('pc_events') || '[]');
+    events.push({ id: genId(), type, detail, timestamp: new Date().toISOString() });
+    if (events.length > 500) events.splice(0, events.length - 500);
+    localStorage.setItem('pc_events', JSON.stringify(events));
+  } catch (_) {}
 }
 
 async function hashPassword(password) {
@@ -53,8 +55,9 @@ async function hashPassword(password) {
 // --- End Tracking ---
 
 // Captura erros JS globais
-window.onerror = function(message, source, lineno) {
-  trackEvent('js_error', `${message} (${source}:${lineno})`);
+window.onerror = function(message, source, lineno, colno, error) {
+  const stack = error && error.stack ? error.stack.slice(0, 200) : '';
+  trackEvent('js_error', `${message} (${source}:${lineno}) ${stack}`);
 };
 
 // Page view automático
@@ -250,7 +253,7 @@ function handleFormSubmit(e) {
       projectType: formData.get('projectType'),
       environment: formData.get('environment'),
       area: formData.get('area'),
-      description: formData.get('description'),
+      description: (formData.get('description') || '').slice(0, 2000),
       timeline: formData.get('timeline'),
       budget: formData.get('budget'),
       requirements,
@@ -258,12 +261,15 @@ function handleFormSubmit(e) {
     },
   };
 
-  const submissions = JSON.parse(localStorage.getItem('pc_submissions') || '[]');
-  submissions.push(submission);
-  localStorage.setItem('pc_submissions', JSON.stringify(submissions));
-  trackEvent('form_submit', `${submission.clientName} — ${submission.data.projectName}`);
-
-  showNotification('Proposta enviada com sucesso! Nossa equipe entrará em contato em breve.', 'success');
+  try {
+    const submissions = JSON.parse(localStorage.getItem('pc_submissions') || '[]');
+    submissions.push(submission);
+    localStorage.setItem('pc_submissions', JSON.stringify(submissions));
+    trackEvent('form_submit', `${submission.clientName} — ${submission.data.projectName}`);
+    showNotification('Proposta enviada com sucesso! Nossa equipe entrará em contato em breve.', 'success');
+  } catch (_) {
+    showNotification('Erro ao salvar proposta. Tente novamente.', 'error');
+  }
   form.reset();
 }
 
@@ -284,7 +290,6 @@ function handleSearch(e) {
  * Handle calendar navigation
  */
 function handleCalendarNavigation(e) {
-  console.log('Calendar navigation:', e.target);
   // In a real app, this would update the calendar to show previous/next month
 }
 
