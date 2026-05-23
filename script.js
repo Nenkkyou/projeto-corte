@@ -7,26 +7,34 @@ const CREDENTIALS = { username: 'admin', password: 'projetocorte2024' };
 const CLIENT_SESSION_KEY = 'pc_client_session';
 
 async function registerClient(name, email, password) {
-  const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
-  if (users.find(u => u.email === email)) return { ok: false, error: 'Email já cadastrado.' };
-  const passwordHash = await hashPassword(password);
-  const user = { name, email, passwordHash, createdAt: new Date().toISOString() };
-  users.push(user);
-  localStorage.setItem('pc_users', JSON.stringify(users));
-  localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name, email, loginAt: new Date().toISOString() }));
-  trackEvent('client_register', email);
-  return { ok: true };
+  try {
+    const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+    if (users.find(u => u.email === email)) return { ok: false, error: 'Email já cadastrado.' };
+    const passwordHash = await hashPassword(password);
+    const user = { name, email, passwordHash, createdAt: new Date().toISOString() };
+    users.push(user);
+    localStorage.setItem('pc_users', JSON.stringify(users));
+    localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name, email, loginAt: new Date().toISOString() }));
+    trackEvent('client_register', email);
+    return { ok: true };
+  } catch (_) {
+    return { ok: false, error: 'Erro ao acessar armazenamento local.' };
+  }
 }
 
 async function loginClient(email, password) {
-  const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
-  const user = users.find(u => u.email === email);
-  if (!user) { trackEvent('client_login_fail', email); return { ok: false, error: 'Email não encontrado.' }; }
-  const hash = await hashPassword(password);
-  if (hash !== user.passwordHash) { trackEvent('client_login_fail', email); return { ok: false, error: 'Senha incorreta.' }; }
-  localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name: user.name, email, loginAt: new Date().toISOString() }));
-  trackEvent('client_login', email);
-  return { ok: true };
+  try {
+    const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+    const user = users.find(u => u.email === email);
+    if (!user) { trackEvent('client_login_fail', email); return { ok: false, error: 'Email não encontrado.' }; }
+    const hash = await hashPassword(password);
+    if (hash !== user.passwordHash) { trackEvent('client_login_fail', email); return { ok: false, error: 'Senha incorreta.' }; }
+    localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name: user.name, email, loginAt: new Date().toISOString() }));
+    trackEvent('client_login', email);
+    return { ok: true };
+  } catch (_) {
+    return { ok: false, error: 'Erro ao acessar armazenamento local.' };
+  }
 }
 
 async function handleCadastroSubmit(e) {
