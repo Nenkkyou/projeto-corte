@@ -5,6 +5,7 @@
 const AUTH_KEY = 'pc_auth';
 const CREDENTIALS = { username: 'admin', password: 'projetocorte2024' };
 const CLIENT_SESSION_KEY = 'pc_client_session';
+const DEV_SESSION_KEY = 'pc_dev_session';
 
 async function registerClient(name, email, password) {
   try {
@@ -156,15 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // DEV login
   const devLoginForm = document.getElementById('devLoginForm');
   if (devLoginForm) {
-    if (localStorage.getItem('pc_dev_session')) {
+    if (localStorage.getItem(DEV_SESSION_KEY)) {
       window.location.replace('dev.html');
+      return;
     }
-    devLoginForm.addEventListener('submit', async function(e) {
+    devLoginForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const password = document.getElementById('devPassword').value;
       const errorEl = document.getElementById('devLoginError');
       if (password === 'KuroNeko@97') {
-        localStorage.setItem('pc_dev_session', '1');
+        localStorage.setItem(DEV_SESSION_KEY, '1');
         trackEvent('dev_login', 'success');
         window.location.replace('dev.html');
       } else {
