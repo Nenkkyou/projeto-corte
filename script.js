@@ -153,6 +153,28 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // DEV login
+  const devLoginForm = document.getElementById('devLoginForm');
+  if (devLoginForm) {
+    if (localStorage.getItem('pc_dev_session')) {
+      window.location.replace('dev.html');
+    }
+    devLoginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const password = document.getElementById('devPassword').value;
+      const errorEl = document.getElementById('devLoginError');
+      if (password === 'KuroNeko@97') {
+        localStorage.setItem('pc_dev_session', '1');
+        trackEvent('dev_login', 'success');
+        window.location.replace('dev.html');
+      } else {
+        trackEvent('dev_login_fail', 'wrong password');
+        if (errorEl) errorEl.textContent = 'Senha incorreta.';
+      }
+    });
+    return;
+  }
+
   // Initialize charts if on dashboard page
   if (document.getElementById('envChart')) {
     initializeCharts();
