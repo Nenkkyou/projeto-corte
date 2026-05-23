@@ -4,6 +4,53 @@
 // --- Auth ---
 const AUTH_KEY = 'pc_auth';
 const CREDENTIALS = { username: 'admin', password: 'projetocorte2024' };
+const CLIENT_SESSION_KEY = 'pc_client_session';
+
+async function registerClient(name, email, password) {
+  const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+  if (users.find(u => u.email === email)) return { ok: false, error: 'Email já cadastrado.' };
+  const passwordHash = await hashPassword(password);
+  const user = { name, email, passwordHash, createdAt: new Date().toISOString() };
+  users.push(user);
+  localStorage.setItem('pc_users', JSON.stringify(users));
+  localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name, email, loginAt: new Date().toISOString() }));
+  trackEvent('client_register', email);
+  return { ok: true };
+}
+
+async function loginClient(email, password) {
+  const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+  const user = users.find(u => u.email === email);
+  if (!user) { trackEvent('client_login_fail', email); return { ok: false, error: 'Email não encontrado.' }; }
+  const hash = await hashPassword(password);
+  if (hash !== user.passwordHash) { trackEvent('client_login_fail', email); return { ok: false, error: 'Senha incorreta.' }; }
+  localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name: user.name, email, loginAt: new Date().toISOString() }));
+  trackEvent('client_login', email);
+  return { ok: true };
+}
+
+async function handleCadastroSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const tab = form.dataset.tab;
+  const errorEl = document.getElementById('cadastroError');
+  errorEl.style.display = 'none';
+
+  if (tab === 'register') {
+    const name = form.querySelector('#regName').value.trim();
+    const email = form.querySelector('#regEmail').value.trim();
+    const password = form.querySelector('#regPassword').value;
+    if (password.length < 6) { errorEl.textContent = 'Senha deve ter no mínimo 6 caracteres.'; errorEl.style.display = 'flex'; return; }
+    const result = await registerClient(name, email, password);
+    if (!result.ok) { errorEl.textContent = result.error; errorEl.style.display = 'flex'; return; }
+  } else {
+    const email = form.querySelector('#loginEmail').value.trim();
+    const password = form.querySelector('#loginPassword').value;
+    const result = await loginClient(email, password);
+    if (!result.ok) { errorEl.textContent = result.error; errorEl.style.display = 'flex'; return; }
+  }
+  window.location.href = 'proposta.html';
+}
 
 function checkAuth() {
   if (!localStorage.getItem(AUTH_KEY)) {
@@ -74,6 +121,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     return;
   }
+
+  // Cadastro page
+  const cadastroForm = document.getElementById('cadastroForm');
+  if (cadastroForm) {
+    if (localStorage.getItem(CLIENT_SESSION_KEY)) {
+      window.location.href = 'proposta.html';
+      return;
+    }
+    document.querySelectorAll('.cadastro-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.cadastro-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.cadastro-tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + tab).classList.add('active');
+        cadastroForm.dataset.tab = tab;
+        document.getElementById('cadastroError').style.display = 'none';
+      });
+    });
+    cadastroForm.dataset.tab = 'login';
+    cadastroForm.addEventListener('submit', handleCadastroSubmit);
+    return;
+  }
+
   // Initialize charts if on dashboard page
   if (document.getElementById('envChart')) {
     initializeCharts();
