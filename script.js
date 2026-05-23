@@ -1,7 +1,48 @@
 // Projeto Corte - JavaScript
 // Handles charts, interactions, and page functionality
 
+// --- Auth ---
+const AUTH_KEY = 'pc_auth';
+const CREDENTIALS = { username: 'admin', password: 'projetocorte2024' };
+
+function checkAuth() {
+  if (!localStorage.getItem(AUTH_KEY)) {
+    window.location.href = 'login.html';
+  }
+}
+
+function logout() {
+  localStorage.removeItem(AUTH_KEY);
+  window.location.href = 'login.html';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const errorEl = document.getElementById('loginError');
+
+  if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
+    localStorage.setItem(AUTH_KEY, '1');
+    window.location.href = 'dashboard.html';
+  } else {
+    errorEl.style.display = 'flex';
+    document.getElementById('password').value = '';
+  }
+}
+// --- End Auth ---
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Login page
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+    // Redirect already-logged-in users
+    if (localStorage.getItem(AUTH_KEY)) {
+      window.location.href = 'dashboard.html';
+    }
+    return;
+  }
   // Initialize charts if on dashboard page
   if (document.getElementById('envChart')) {
     initializeCharts();

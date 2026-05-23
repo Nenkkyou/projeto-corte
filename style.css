@@ -1979,3 +1979,195 @@ table .id { color: var(--muted); font-size: 12px; }
   .cta-section .cta-buttons { flex-direction: column; align-items: stretch; }
   .cta-section .cta-buttons .btn { justify-content: center; }
 }
+
+/* === Login Page === */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  padding: 24px;
+}
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.login-logo img { height: 36px; width: auto; }
+.login-logo span {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.login-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: center;
+  margin: 4px 0 0;
+}
+.login-subtitle {
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 16px;
+}
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.login-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.login-input-wrap { position: relative; }
+.login-input-wrap i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.login-input-wrap input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r);
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--surface);
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+.login-input-wrap input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: var(--focus-ring);
+}
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--danger-soft);
+  border: 1px solid var(--danger-border);
+  color: var(--danger);
+  border-radius: var(--r);
+  padding: 10px 14px;
+  font-size: 0.875rem;
+}
+.login-btn { width: 100%; justify-content: center; margin-top: 4px; }
+.login-back {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+.login-back:hover { color: var(--green); }
+
+/* === Logout button in sidebar === */
+.logout-btn {
+  width: calc(100% - 32px);
+  margin: 8px 16px 0;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--r);
+  transition: var(--transition);
+}
+.logout-btn:hover {
+  background: rgba(220,38,38,0.15);
+  border-color: rgba(220,38,38,0.4);
+  color: #fca5a5;
+}
+
+/* === Proposta page (public form) === */
+.proposta-page {
+  flex: 1;
+  background: var(--paper);
+  padding: 40px 24px 60px;
+}
+.proposta-inner { max-width: 1000px; margin: 0 auto; }
+.proposta-header { margin-bottom: 32px; }
+.proposta-header h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
+}
+.proposta-header p { font-size: 1rem; color: var(--muted); margin: 0; }
+.proposta-body {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+.info-box-contact {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.info-box-contact p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  margin: 6px 0;
+}
+.info-box-contact a { color: var(--ink-2); text-decoration: none; }
+.info-box-contact a:hover { color: var(--green); }
+
+/* Navbar internal area link */
+.nav-link-internal {
+  font-size: 0.8rem;
+  color: var(--muted) !important;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-link-internal:hover { color: var(--ink) !important; }
+
+@media (max-width: 768px) {
+  .proposta-body { grid-template-columns: 1fr; }
+  .login-card { padding: 32px 20px; }
+}
