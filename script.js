@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileOverlay.addEventListener('click', function() {
       toggleMobileMenu(false);
     });
-    mobileMenu.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+    mobileMenu.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(function(link) {
       link.addEventListener('click', function() {
         toggleMobileMenu(false);
       });
