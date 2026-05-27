@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEV Panel - Projeto Corte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>if (!localStorage.getItem('pc_dev_session')) { window.location.replace('dev-login.html'); }</script>
+</head>
+<body style="background:#111;margin:0">
+  <div style="display:flex">
+    <!-- DEV Sidebar -->
+    <aside class="dev-sidebar">
+      <div class="dev-sidebar-logo">
+        <img src="assets/logo.png" alt="Projeto Corte" />
+        <span>DEV</span>
+        <span class="dev-badge">PAINEL</span>
+      </div>
+      <nav class="dev-nav">
+        <button class="dev-nav-item active" data-section="overview"><i class="fas fa-gauge-high"></i> Overview</button>
+        <button class="dev-nav-item" data-section="users"><i class="fas fa-users"></i> Usuários</button>
+        <button class="dev-nav-item" data-section="submissions"><i class="fas fa-file-lines"></i> Formulários</button>
+        <button class="dev-nav-item" data-section="events"><i class="fas fa-list-ul"></i> Event Log</button>
+        <button class="dev-nav-item" data-section="health"><i class="fas fa-heart-pulse"></i> HealthCheck</button>
+        <button class="dev-nav-item" data-section="storage"><i class="fas fa-database"></i> LocalStorage</button>
+      </nav>
+      <button class="dev-logout" onclick="devLogout()"><i class="fas fa-right-from-bracket"></i> Sair</button>
+    </aside>
+
+    <!-- DEV Content -->
+    <main class="dev-content">
+
+      <!-- Overview -->
+      <section class="dev-section active" id="section-overview">
+        <h2 class="dev-section-title"><i class="fas fa-gauge-high"></i> Overview</h2>
+        <div class="dev-stats" id="overviewStats"></div>
+        <h3 style="font-size:0.875rem;color:#6b7280;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em">Últimos Eventos</h3>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="overviewRecentEvents">
+            <thead><tr><th>Timestamp</th><th>Tipo</th><th>Detalhe</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Usuários -->
+      <section class="dev-section" id="section-users">
+        <h2 class="dev-section-title"><i class="fas fa-users"></i> Usuários Cadastrados</h2>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="usersTable">
+            <thead><tr><th>Nome</th><th>Email</th><th>Cadastrado em</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Formulários -->
+      <section class="dev-section" id="section-submissions">
+        <h2 class="dev-section-title"><i class="fas fa-file-lines"></i> Formulários Enviados</h2>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="submissionsTable">
+            <thead><tr><th>Data</th><th>Cliente</th><th>Projeto</th><th>Orçamento</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Event Log -->
+      <section class="dev-section" id="section-events">
+        <h2 class="dev-section-title"><i class="fas fa-list-ul"></i> Event Log</h2>
+        <div class="dev-filter" style="display:flex;gap:10px;align-items:center">
+          <select id="eventFilter" onchange="renderEvents()">
+            <option value="">Todos os tipos</option>
+            <option value="page_view">page_view</option>
+            <option value="admin_login">admin_login</option>
+            <option value="admin_logout">admin_logout</option>
+            <option value="admin_login_fail">admin_login_fail</option>
+            <option value="client_register">client_register</option>
+            <option value="client_login">client_login</option>
+            <option value="client_login_fail">client_login_fail</option>
+            <option value="form_submit">form_submit</option>
+            <option value="js_error">js_error</option>
+          </select>
+          <button class="dev-btn danger" onclick="clearEvents()">Limpar log</button>
+        </div>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="eventsTable">
+            <thead><tr><th>Timestamp</th><th>Tipo</th><th>Detalhe</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- HealthCheck -->
+      <section class="dev-section" id="section-health">
+        <h2 class="dev-section-title"><i class="fas fa-heart-pulse"></i> HealthCheck</h2>
+        <button class="dev-btn" onclick="runHealthChecks()" style="margin-bottom:20px"><i class="fas fa-play"></i> Rodar Checks</button>
+        <div class="health-grid" id="healthGrid"></div>
+      </section>
+
+      <!-- LocalStorage -->
+      <section class="dev-section" id="section-storage">
+        <h2 class="dev-section-title"><i class="fas fa-database"></i> LocalStorage Viewer</h2>
+        <div style="display:flex;gap:10px;margin-bottom:16px">
+          <button class="dev-btn" onclick="exportStorage()"><i class="fas fa-download"></i> Exportar tudo</button>
+        </div>
+        <div id="storageList"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function devLogout() {
+      localStorage.removeItem('pc_dev_session');
+      window.location.href = 'dev-login.html';
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR');
+    }
+
+    document.querySelectorAll('.dev-nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.dev-nav-item').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.dev-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('section-' + btn.dataset.section).classList.add('active');
+        renderSection(btn.dataset.section);
+      });
+    });
+
+    function renderSection(name) {
+      if (name === 'overview') renderOverview();
+      else if (name === 'users') renderUsers();
+      else if (name === 'submissions') renderSubmissions();
+      else if (name === 'events') renderEvents();
+      else if (name === 'storage') renderStorage();
+    }
+
+    function renderOverview() {
+      const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+      const submissions = JSON.parse(localStorage.getItem('pc_submissions') || '[]');
+      const events = JSON.parse(localStorage.getItem('pc_events') || '[]');
+      const lastEvent = events[events.length - 1];
+
+      const stats = [
+        { label: 'Clientes Cadastrados', value: users.length, sub: 'pc_users' },
+        { label: 'Formulários Enviados', value: submissions.length, sub: 'pc_submissions' },
+        { label: 'Eventos no Log', value: events.length, sub: 'máx 500' },
+        { label: 'Último Evento', value: lastEvent ? lastEvent.type : '—', sub: lastEvent ? fmtDate(lastEvent.timestamp) : '' },
+      ];
+      document.getElementById('overviewStats').innerHTML = stats.map(s => `
+        <div class="dev-stat-card">
+          <div class="dev-stat-label">${s.label}</div>
+          <div class="dev-stat-value">${s.value}</div>
+          <div class="dev-stat-sub">${s.sub}</div>
+        </div>`).join('');
+
+      const recent = [...events].reverse().slice(0, 10);
+      document.querySelector('#overviewRecentEvents tbody').innerHTML = recent.length
+        ? recent.map(e => `<tr><td>${fmtDate(e.timestamp)}</td><td><span class="event-badge badge-${e.type}">${e.type}</span></td><td>${e.detail}</td></tr>`).join('')
+        : '<tr><td colspan="3" class="dev-empty">Nenhum evento registrado</td></tr>';
+    }
+
+    function renderUsers() {
+      const users = JSON.parse(localStorage.getItem('pc_users') || '[]');
+      document.querySelector('#usersTable tbody').innerHTML = users.length
+        ? [...users].reverse().map(u => `<tr><td>${u.name}</td><td>${u.email}</td><td>${fmtDate(u.createdAt)}</td></tr>`).join('')
+        : '<tr><td colspan="3" class="dev-empty">Nenhum usuário cadastrado</td></tr>';
+    }
+
+    function renderSubmissions() {
+      const submissions = JSON.parse(localStorage.getItem('pc_submissions') || '[]');
+      const tbody = document.querySelector('#submissionsTable tbody');
+      if (!submissions.length) { tbody.innerHTML = '<tr><td colspan="5" class="dev-empty">Nenhum formulário enviado</td></tr>'; return; }
+      tbody.innerHTML = [...submissions].reverse().map(s => `
+        <tr class="expandable-row" onclick="toggleDetail('${s.id}')">
+          <td>${fmtDate(s.submittedAt)}</td>
+          <td>${s.clientName}<br><span style="color:#6b7280;font-size:.75rem">${s.clientEmail}</span></td>
+          <td>${s.data.projectName}</td>
+          <td>${s.data.budget}</td>
+          <td><i class="fas fa-chevron-down" style="color:#6b7280"></i></td>
+        </tr>
+        <tr class="detail-row" id="detail-${s.id}">
+          <td colspan="5">${JSON.stringify(s.data, null, 2)}</td>
+        </tr>`).join('');
+    }
+
+    function toggleDetail(id) {
+      const row = document.getElementById('detail-' + id);
+      row.classList.toggle('open');
+    }
+
+    function renderEvents() {
+      const filter = document.getElementById('eventFilter').value;
+      const events = JSON.parse(localStorage.getItem('pc_events') || '[]');
+      const filtered = filter ? events.filter(e => e.type === filter) : events;
+      document.querySelector('#eventsTable tbody').innerHTML = filtered.length
+        ? [...filtered].reverse().map(e => `<tr><td style="font-family:var(--font-mono);font-size:.8rem">${fmtDate(e.timestamp)}</td><td><span class="event-badge badge-${e.type}">${e.type}</span></td><td>${e.detail}</td></tr>`).join('')
+        : '<tr><td colspan="3" class="dev-empty">Nenhum evento</td></tr>';
+    }
+
+    function clearEvents() {
+      if (!confirm('Limpar todo o event log?')) return;
+      localStorage.removeItem('pc_events');
+      renderEvents();
+      renderOverview();
+    }
+
+    const HEALTH_PAGES = ['index.html', 'proposta.html', 'cadastro.html', 'login.html', 'dashboard.html', 'clientes.html', 'projetos.html', 'agenda.html', 'dev.html'];
+    const HEALTH_ASSETS = ['assets/logo.png', 'style.css'];
+
+    async function runHealthChecks() {
+      const grid = document.getElementById('healthGrid');
+      const checks = [];
+      for (const page of HEALTH_PAGES) checks.push({ label: `Página: ${page}`, key: page, type: 'page' });
+      for (const asset of HEALTH_ASSETS) checks.push({ label: `Asset: ${asset}`, key: asset, type: 'asset' });
+      checks.push({ label: 'localStorage funcional', key: 'ls', type: 'ls' });
+      checks.push({ label: 'Erros JS (últimas 24h)', key: 'jserr', type: 'jserr' });
+
+      grid.innerHTML = checks.map(c => `
+        <div class="health-item" id="hc-${c.key.replace(/[^a-z0-9]/gi,'-')}">
+          <i class="health-icon pending fas fa-circle-notch fa-spin"></i>
+          <div><div class="health-label">${c.label}</div><div class="health-msg">verificando...</div></div>
+        </div>`).join('');
+
+      for (const c of checks) {
+        const id = 'hc-' + c.key.replace(/[^a-z0-9]/gi, '-');
+        let ok = false, msg = '';
+        try {
+          if (c.type === 'page' || c.type === 'asset') {
+            const res = await fetch(c.key, { cache: 'no-store' });
+            ok = res.ok; msg = ok ? `HTTP ${res.status}` : `HTTP ${res.status} — falha`;
+          } else if (c.type === 'ls') {
+            localStorage.setItem('__hc_test__', '1');
+            ok = localStorage.getItem('__hc_test__') === '1';
+            localStorage.removeItem('__hc_test__');
+            msg = ok ? 'leitura/escrita OK' : 'falha ao ler/escrever';
+          } else if (c.type === 'jserr') {
+            const events = JSON.parse(localStorage.getItem('pc_events') || '[]');
+            const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+            const count = events.filter(e => e.type === 'js_error' && e.timestamp > cutoff).length;
+            ok = count === 0; msg = ok ? 'nenhum erro nas últimas 24h' : `${count} erro(s) detectado(s)`;
+          }
+        } catch (err) { ok = false; msg = err.message; }
+        const el = document.getElementById(id);
+        el.querySelector('.health-icon').className = `health-icon ${ok ? 'ok' : 'fail'} fas fa-${ok ? 'circle-check' : 'circle-xmark'}`;
+        el.querySelector('.health-msg').textContent = msg;
+      }
+    }
+
+    function renderStorage() {
+      const keys = Object.keys(localStorage).sort();
+      const el = document.getElementById('storageList');
+      if (!keys.length) { el.innerHTML = '<div class="dev-empty">localStorage vazio</div>'; return; }
+      el.innerHTML = keys.map(k => {
+        const raw = localStorage.getItem(k);
+        const truncated = raw.length > 200 ? raw.slice(0, 200) + '…' : raw;
+        return `<div class="ls-row">
+          <div class="ls-key">${k}</div>
+          <div class="ls-val">${truncated}</div>
+          <div class="ls-actions">
+            <button class="dev-btn danger" onclick="deleteKey('${k}')"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function deleteKey(key) {
+      if (!confirm(`Deletar chave "${key}"?`)) return;
+      localStorage.removeItem(key);
+      renderStorage();
+    }
+
+    function exportStorage() {
+      const data = {};
+      Object.keys(localStorage).forEach(k => { data[k] = localStorage.getItem(k); });
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `pc-localstorage-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+    }
+
+    renderOverview();
+  </script>
+</body>
+</html>

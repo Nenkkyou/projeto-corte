@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar - Projeto Corte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="assets/logo.png" alt="Projeto Corte" />
+        <span>Projeto Corte</span>
+      </div>
+      <h1 class="login-title">Área da Empresa</h1>
+      <p class="login-subtitle">Acesso restrito à equipe interna</p>
+
+      <form class="login-form" id="loginForm">
+        <div class="login-field">
+          <label for="username">Usuário</label>
+          <div class="login-input-wrap">
+            <i class="fas fa-user"></i>
+            <input type="text" id="username" name="username" placeholder="Digite seu usuário" autocomplete="username" />
+          </div>
+        </div>
+        <div class="login-field">
+          <label for="password">Senha</label>
+          <div class="login-input-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" autocomplete="current-password" />
+          </div>
+        </div>
+        <div class="login-error" id="loginError" style="display:none">
+          <i class="fas fa-circle-exclamation"></i> Usuário ou senha incorretos.
+        </div>
+        <button type="submit" class="btn btn-green btn-large login-btn">
+          <i class="fas fa-arrow-right-to-bracket"></i> Entrar
+        </button>
+      </form>
+
+      <a href="index.html" class="login-back">
+        <i class="fas fa-arrow-left"></i> Voltar ao site
+      </a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

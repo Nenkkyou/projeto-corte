@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>DEV Panel - Projeto Corte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body class="dev-login-body">
+  <div class="dev-login-card">
+    <div class="dev-login-badge">
+      <i class="fas fa-terminal"></i>
+      DEV
+    </div>
+    <h1 class="dev-login-title">DEV Panel</h1>
+    <p class="dev-login-subtitle">Acesso restrito — somente desenvolvedores</p>
+
+    <form id="devLoginForm">
+      <div class="dev-login-field">
+        <label for="devPassword">Senha mestre</label>
+        <div class="dev-login-input-wrap">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            id="devPassword"
+            name="devPassword"
+            placeholder="Digite a senha de acesso"
+            autocomplete="current-password"
+            autofocus
+          />
+        </div>
+      </div>
+
+      <div class="dev-login-error" id="devLoginError"></div>
+
+      <button type="submit" class="dev-login-btn">
+        <i class="fas fa-terminal"></i>
+        Acessar painel
+      </button>
+    </form>
+
+    <a href="index.html" class="dev-login-back">
+      <i class="fas fa-arrow-left"></i> Voltar ao site
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

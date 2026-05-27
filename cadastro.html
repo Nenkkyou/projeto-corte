@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar / Cadastrar - Projeto Corte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card cadastro-card">
+      <div class="login-logo">
+        <img src="assets/logo.png" alt="Projeto Corte" />
+        <span>Projeto Corte</span>
+      </div>
+      <h1 class="login-title">Área do Cliente</h1>
+
+      <div class="cadastro-tabs">
+        <button class="cadastro-tab-btn" data-tab="login">Entrar</button>
+        <button class="cadastro-tab-btn active" data-tab="register">Cadastrar</button>
+      </div>
+
+      <form class="login-form" id="cadastroForm" data-tab="register">
+        <!-- Login panel -->
+        <div class="cadastro-tab-panel" id="panel-login">
+          <div class="login-field">
+            <label for="loginEmail">Email</label>
+            <div class="login-input-wrap">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email" />
+            </div>
+          </div>
+          <div class="login-field">
+            <label for="loginPassword">Senha</label>
+            <div class="login-input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="loginPassword" placeholder="Sua senha" autocomplete="current-password" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Register panel -->
+        <div class="cadastro-tab-panel active" id="panel-register">
+          <div class="login-field">
+            <label for="regName">Nome Completo</label>
+            <div class="login-input-wrap">
+              <i class="fas fa-user"></i>
+              <input type="text" id="regName" placeholder="João Silva" autocomplete="name" />
+            </div>
+          </div>
+          <div class="login-field">
+            <label for="regEmail">Email</label>
+            <div class="login-input-wrap">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="regEmail" placeholder="seu@email.com" autocomplete="email" />
+            </div>
+          </div>
+          <div class="login-field">
+            <label for="regPassword">Senha <span style="font-weight:400;color:var(--muted)">(mín. 6 caracteres)</span></label>
+            <div class="login-input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="regPassword" placeholder="Crie uma senha" autocomplete="new-password" />
+            </div>
+          </div>
+        </div>
+
+        <div class="login-error" id="cadastroError" style="display:none"></div>
+
+        <button type="submit" class="btn btn-green btn-large login-btn">
+          <i class="fas fa-arrow-right-to-bracket"></i> Continuar
+        </button>
+      </form>
+
+      <a href="index.html" class="login-back">
+        <i class="fas fa-arrow-left"></i> Voltar ao site
+      </a>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
