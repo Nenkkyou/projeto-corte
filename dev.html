@@ -38,28 +38,34 @@
         <h2 class="dev-section-title"><i class="fas fa-gauge-high"></i> Overview</h2>
         <div class="dev-stats" id="overviewStats"></div>
         <h3 style="font-size:0.875rem;color:#6b7280;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em">Últimos Eventos</h3>
-        <table class="dev-table" id="overviewRecentEvents">
-          <thead><tr><th>Timestamp</th><th>Tipo</th><th>Detalhe</th></tr></thead>
-          <tbody></tbody>
-        </table>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="overviewRecentEvents">
+            <thead><tr><th>Timestamp</th><th>Tipo</th><th>Detalhe</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Usuários -->
       <section class="dev-section" id="section-users">
         <h2 class="dev-section-title"><i class="fas fa-users"></i> Usuários Cadastrados</h2>
-        <table class="dev-table" id="usersTable">
-          <thead><tr><th>Nome</th><th>Email</th><th>Cadastrado em</th></tr></thead>
-          <tbody></tbody>
-        </table>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="usersTable">
+            <thead><tr><th>Nome</th><th>Email</th><th>Cadastrado em</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Formulários -->
       <section class="dev-section" id="section-submissions">
         <h2 class="dev-section-title"><i class="fas fa-file-lines"></i> Formulários Enviados</h2>
-        <table class="dev-table" id="submissionsTable">
-          <thead><tr><th>Data</th><th>Cliente</th><th>Projeto</th><th>Orçamento</th><th></th></tr></thead>
-          <tbody></tbody>
-        </table>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="submissionsTable">
+            <thead><tr><th>Data</th><th>Cliente</th><th>Projeto</th><th>Orçamento</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Event Log -->
@@ -80,10 +86,12 @@
           </select>
           <button class="dev-btn danger" onclick="clearEvents()">Limpar log</button>
         </div>
-        <table class="dev-table" id="eventsTable">
-          <thead><tr><th>Timestamp</th><th>Tipo</th><th>Detalhe</th></tr></thead>
-          <tbody></tbody>
-        </table>
+        <div class="dev-table-wrap">
+          <table class="dev-table" id="eventsTable">
+            <thead><tr><th>Timestamp</th><th>Tipo</th><th>Detalhe</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </section>
 
       <!-- HealthCheck -->
