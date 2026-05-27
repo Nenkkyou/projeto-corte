@@ -202,6 +202,31 @@ document.addEventListener('DOMContentLoaded', () => {
   calendarNavButtons.forEach(button => {
     button.addEventListener('click', handleCalendarNavigation);
   });
+
+  // Hamburger menu (landing page)
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileOverlay = document.getElementById('mobileNavOverlay');
+  if (hamburger && mobileMenu && mobileOverlay) {
+    function toggleMobileMenu(open) {
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.toggle('open', open);
+      mobileOverlay.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    hamburger.addEventListener('click', function() {
+      toggleMobileMenu(!hamburger.classList.contains('open'));
+    });
+    mobileOverlay.addEventListener('click', function() {
+      toggleMobileMenu(false);
+    });
+    mobileMenu.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        toggleMobileMenu(false);
+      });
+    });
+  }
 });
 
 /**

@@ -1840,6 +1840,74 @@ table .id { color: var(--muted); font-size: 12px; }
   font-size: 12px;
 }
 
+/* === Hamburger & Mobile Nav === */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+.mobile-nav-overlay.open { display: block; }
+
+.mobile-nav-menu {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 16px 20px;
+  gap: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.mobile-nav-menu.open { display: flex; }
+
+.mobile-nav-link {
+  padding: 12px 16px;
+  border-radius: var(--r);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: block;
+}
+.mobile-nav-link:hover { background: var(--black-2); }
+.mobile-nav-link.active { color: var(--green); }
+.mobile-nav-link-internal { color: var(--text-muted); font-size: 0.875rem; }
+.mobile-nav-cta { margin-top: 10px; justify-content: center; }
+
 /* ===========================
    RESPONSIVE
 =========================== */
@@ -1933,6 +2001,8 @@ table .id { color: var(--muted); font-size: 12px; }
   .footer { padding: 40px 24px 24px; }
   .navbar { padding: 0 20px; }
   .navbar-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .navbar-cta { display: none; }
   .features-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
   .stats-section-inner { grid-template-columns: repeat(2, 1fr); }
   .stat { border-right: none; border-bottom: 1px solid var(--border-dark); }
