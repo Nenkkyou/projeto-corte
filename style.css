@@ -1956,8 +1956,8 @@ table .id { color: var(--muted); font-size: 12px; }
   .logo-container { display: none; }
   .sidebar .primary-btn,
   .sidebar .secondary-btn,
-  .tagline,
-  .logout-btn { display: none; }
+  .sidebar .logout-btn,
+  .tagline { display: none; }
   .nav-item[href="index.html"] { display: none; }
   .nav-menu {
     flex-direction: row;
