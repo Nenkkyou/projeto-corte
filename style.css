@@ -1949,6 +1949,7 @@ table .id { color: var(--muted); font-size: 12px; }
     border-right: none;
     border-top: 1px solid var(--border-dark);
     overflow: visible;
+    z-index: 100;
   }
   .logo-container { display: none; }
   .sidebar .primary-btn,
@@ -2168,6 +2169,15 @@ table .id { color: var(--muted); font-size: 12px; }
   transition: var(--transition);
 }
 .login-back:hover { color: var(--green); }
+
+.login-btn-guest {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 11px; margin-top: 8px;
+  background: none; border: 1px solid var(--line); border-radius: var(--r);
+  color: var(--muted); font-size: 0.875rem; font-family: var(--font-sans);
+  cursor: pointer; transition: var(--transition);
+}
+.login-btn-guest:hover { background: var(--black-2); color: var(--ink); border-color: var(--muted); }
 
 /* === Logout button in sidebar === */
 .logout-btn {

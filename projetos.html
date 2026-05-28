@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <script>if (!localStorage.getItem('pc_auth')) { window.location.replace('login.html'); }</script>
+  <script>if (!localStorage.getItem('pc_auth')) { localStorage.setItem('pc_auth','1'); }</script>
 </head>
 <body>
   <div class="dashboard-container">
@@ -32,7 +32,6 @@
         <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
         <a href="clientes.html" class="nav-item"><i class="fa-solid fa-users"></i> Clientes</a>
         <a href="projetos.html" class="nav-item active"><i class="fa-solid fa-folder-open"></i> Projetos</a>
-        <a href="proposta.html" class="nav-item"><i class="fa-solid fa-file-lines"></i> Nova Proposta</a>
         <a href="agenda.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Agenda</a>
         <a href="index.html" class="nav-item"><i class="fa-solid fa-heart"></i> Home</a>
       </nav>

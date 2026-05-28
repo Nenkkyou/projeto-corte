@@ -128,6 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem(AUTH_KEY)) {
       window.location.href = 'dashboard.html';
     }
+    const guestAdminBtn = document.getElementById('guestAdminBtn');
+    if (guestAdminBtn) {
+      guestAdminBtn.addEventListener('click', function() {
+        localStorage.setItem(AUTH_KEY, '1');
+        trackEvent('admin_guest_access', 'demo');
+        window.location.replace('dashboard.html');
+      });
+    }
     return;
   }
 
@@ -151,6 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     cadastroForm.dataset.tab = 'login';
     cadastroForm.addEventListener('submit', handleCadastroSubmit);
+    const guestClientBtn = document.getElementById('guestClientBtn');
+    if (guestClientBtn) {
+      guestClientBtn.addEventListener('click', function() {
+        localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({
+          name: 'Visitante',
+          email: 'demo@visitante.com',
+          loginAt: new Date().toISOString()
+        }));
+        trackEvent('client_guest_access', 'demo');
+        window.location.replace('proposta.html');
+      });
+    }
     return;
   }
 
