@@ -38,26 +38,18 @@ async function loginClient(email, password) {
   }
 }
 
-async function handleCadastroSubmit(e) {
+function handleCadastroSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const tab = form.dataset.tab;
-  const errorEl = document.getElementById('cadastroError');
-  errorEl.style.display = 'none';
-
-  if (tab === 'register') {
-    const name = form.querySelector('#regName').value.trim();
-    const email = form.querySelector('#regEmail').value.trim();
-    const password = form.querySelector('#regPassword').value;
-    if (password.length < 6) { errorEl.textContent = 'Senha deve ter no mínimo 6 caracteres.'; errorEl.style.display = 'flex'; return; }
-    const result = await registerClient(name, email, password);
-    if (!result.ok) { errorEl.textContent = result.error; errorEl.style.display = 'flex'; return; }
-  } else {
-    const email = form.querySelector('#loginEmail').value.trim();
-    const password = form.querySelector('#loginPassword').value;
-    const result = await loginClient(email, password);
-    if (!result.ok) { errorEl.textContent = result.error; errorEl.style.display = 'flex'; return; }
-  }
+  const name = tab === 'register'
+    ? (form.querySelector('#regName').value.trim() || 'Visitante')
+    : (form.querySelector('#loginEmail').value.trim() || 'Visitante');
+  const email = tab === 'register'
+    ? (form.querySelector('#regEmail').value.trim() || 'demo@visitante.com')
+    : (form.querySelector('#loginEmail').value.trim() || 'demo@visitante.com');
+  localStorage.setItem(CLIENT_SESSION_KEY, JSON.stringify({ name, email, loginAt: new Date().toISOString() }));
+  trackEvent('client_login', email);
   window.location.href = 'proposta.html';
 }
 
@@ -75,19 +67,10 @@ function logout() {
 
 function handleLogin(e) {
   e.preventDefault();
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value;
-  const errorEl = document.getElementById('loginError');
-
-  if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
-    localStorage.setItem(AUTH_KEY, '1');
-    trackEvent('admin_login', username);
-    window.location.href = 'dashboard.html';
-  } else {
-    trackEvent('admin_login_fail', username);
-    errorEl.style.display = 'flex';
-    document.getElementById('password').value = '';
-  }
+  const username = document.getElementById('username').value.trim() || 'admin';
+  localStorage.setItem(AUTH_KEY, '1');
+  trackEvent('admin_login', username);
+  window.location.href = 'dashboard.html';
 }
 // --- Tracking ---
 function genId() {
