@@ -373,6 +373,8 @@ p { margin: 0 0 1rem 0; }
   border-radius: var(--r-lg);
   padding: 20px 24px;
   box-shadow: var(--shadow-sm);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .chart-card h3 {
@@ -1954,7 +1956,9 @@ table .id { color: var(--muted); font-size: 12px; }
   .logo-container { display: none; }
   .sidebar .primary-btn,
   .sidebar .secondary-btn,
+  .sidebar .logout-btn,
   .tagline { display: none; }
+  .nav-item[href="index.html"] { display: none; }
   .nav-menu {
     flex-direction: row;
     padding: 0;
@@ -2009,6 +2013,13 @@ table .id { color: var(--muted); font-size: 12px; }
   .stat { border-right: none; border-bottom: 1px solid var(--border-dark); }
   .stat:last-child { border-bottom: none; }
   .charts { grid-template-columns: 1fr; }
+  .chart-card { padding: 16px 12px; }
+  .chart-card canvas { max-height: 200px; min-height: 200px; }
+  .timeline { overflow-x: auto; justify-content: flex-start; gap: 4px; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+  .timeline-step { min-width: 72px; flex: 0 0 72px; }
+  .step-title { font-size: 10px; }
+  .step-desc { font-size: 9px; }
+  .timeline-section { padding: 16px; }
   .financial-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
